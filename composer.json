@@ -1,0 +1,29 @@
+{
+    "name": "vicam/papyrus-pdf-fonts-cjk",
+    "description": "Noto Sans SC and KR fallback fonts for the PapyrusPDF overlay renderer: Chinese, Japanese kana and Korean text.",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3",
+        "vicam/papyrus-pdf": "^0.2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "PapyrusPDF\\FontsCjk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PapyrusPDF\\FontsCjk\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
