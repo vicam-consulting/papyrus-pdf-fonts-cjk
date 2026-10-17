@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PapyrusPDF\FontsCjk;
 
-use PapyrusPDF\Stamp\OverlayFontFile;
+use PapyrusPDF\Papyrus\Overlay\OverlayFontFile;
 
 /**
  * Static Noto Sans SC and Noto Sans KR Regular, for overlay text in Chinese, Japanese kana and Korean.

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PapyrusPDF\FontsCjk\Tests;
 
 use PapyrusPDF\FontsCjk\NotoSansCjk;
-use PapyrusPDF\PdfEngineFactory;
-use PapyrusPDF\Stamp\OverlayFontFile;
-use PapyrusPDF\Stamp\OverlayFonts;
+use PapyrusPDF\Papyrus\Overlay\OverlayFontFile;
+use PapyrusPDF\Papyrus\Overlay\OverlayFonts;
+use PapyrusPDF\Papyrus\Overlay\OverlayRendererFactory;
 use PHPUnit\Framework\TestCase;
 
 final class NotoSansCjkTest extends TestCase
@@ -40,9 +40,9 @@ final class NotoSansCjkTest extends TestCase
         $directory = sys_get_temp_dir().'/papyrus-fonts-cjk-'.bin2hex(random_bytes(6));
         self::assertTrue(mkdir($directory, 0700));
         try {
-            $factory = new PdfEngineFactory();
-            $default = $factory->createOverlayRenderer($directory);
-            $cjk = $factory->createOverlayRenderer($directory, null, OverlayFonts::bundled(NotoSansCjk::fontFiles()));
+            $factory = new OverlayRendererFactory();
+            $default = $factory->create($directory);
+            $cjk = $factory->create($directory, null, OverlayFonts::bundled(NotoSansCjk::fontFiles()));
             $text = '王小明 東京都 ひらがな カタカナ 김민준 서울 Łukasz Дмитрий';
 
             self::assertFalse($default->supports($text));

@@ -7,7 +7,7 @@ Optional static Noto Sans and Noto Serif **JP, SC and KR Regular**, under SIL OF
 composer require vicam/papyrus-pdf-fonts-cjk
 ```
 
-With PapyrusPDF 0.2.10+, `PdfEngineFactory` discovers `NotoCjk` automatically.
+With PapyrusPDF 0.3.0+, `PdfEngineFactory` discovers `NotoCjk` automatically.
 `fillForm()` and stored-value refresh use these fonts only when the source font
 and explicit caller fonts cannot draw the displayed text. No caller font loading
 is needed. Mincho/Min/Ming/Song/Batang/Myeongjo/serif requests select Serif;
@@ -33,7 +33,7 @@ The existing helper keeps its SC/KR order for compatibility:
 
 ```php
 use PapyrusPDF\FontsCjk\NotoSansCjk;
-use PapyrusPDF\Stamp\OverlayFonts;
+use PapyrusPDF\Papyrus\Overlay\OverlayFonts;
 
 $fonts = OverlayFonts::bundled(NotoSansCjk::fontFiles());
 ```
