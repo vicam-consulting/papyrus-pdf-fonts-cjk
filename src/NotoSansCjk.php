@@ -20,10 +20,12 @@ final class NotoSansCjk
     /** Korean Hangul; about 6.2 MB. Han characters come from the Chinese font when it is listed first. */
     public const string KOREAN = 'NotoSansKR-Regular.ttf';
 
+    public const string JAPANESE = 'NotoSansJP-Regular.ttf';
+
     /** The absolute path of one of the bundled font files, such as self::KOREAN. */
     public static function path(string $file): string
     {
-        if (!in_array($file, [self::SIMPLIFIED_CHINESE, self::KOREAN], true)) {
+        if (!in_array($file, [self::SIMPLIFIED_CHINESE, self::KOREAN, self::JAPANESE], true)) {
             throw new \InvalidArgumentException('Unknown CJK font file.');
         }
 
