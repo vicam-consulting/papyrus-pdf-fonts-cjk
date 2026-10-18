@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PapyrusPDF\FontsCjk\Tests;
+namespace Vicam\Pdf\FontsCjk\Tests;
 
-use PapyrusPDF\FontsCjk\NotoSansCjk;
-use PapyrusPDF\Papyrus\Overlay\OverlayFontFile;
-use PapyrusPDF\Papyrus\Overlay\OverlayFonts;
-use PapyrusPDF\Papyrus\Overlay\OverlayRendererFactory;
+use Vicam\Pdf\FontsCjk\NotoSansCjk;
+use Vicam\Pdf\Overlay\OverlayFontFile;
+use Vicam\Pdf\Overlay\OverlayFonts;
+use Vicam\Pdf\Overlay\OverlayRendererFactory;
 use PHPUnit\Framework\TestCase;
 
 final class NotoSansCjkTest extends TestCase
@@ -32,8 +32,8 @@ final class NotoSansCjkTest extends TestCase
         self::assertSame('NotoSansSC-Regular.ttf', NotoSansCjk::SIMPLIFIED_CHINESE);
         self::assertSame('NotoSansKR-Regular.ttf', NotoSansCjk::KOREAN);
         self::assertSame('NotoSansJP-Regular.ttf', NotoSansCjk::JAPANESE);
-        self::assertSame(\PapyrusPDF\FontsJa\NotoJa::path(\PapyrusPDF\FontsJa\NotoJa::SANS), NotoSansCjk::path(NotoSansCjk::JAPANESE));
-        self::assertSame(\PapyrusPDF\FontsZhHant\NotoZhHant::path(\PapyrusPDF\FontsZhHant\NotoZhHant::SANS), NotoSansCjk::path(NotoSansCjk::TRADITIONAL_CHINESE));
+        self::assertSame(\Vicam\Pdf\FontsJa\NotoJa::path(\Vicam\Pdf\FontsJa\NotoJa::SANS), NotoSansCjk::path(NotoSansCjk::JAPANESE));
+        self::assertSame(\Vicam\Pdf\FontsZhHant\NotoZhHant::path(\Vicam\Pdf\FontsZhHant\NotoZhHant::SANS), NotoSansCjk::path(NotoSansCjk::TRADITIONAL_CHINESE));
         self::assertSame(['NotoSansSC-Regular.ttf', 'NotoSansKR-Regular.ttf'], array_map(basename(...), NotoSansCjk::paths()));
         self::assertSame([], glob(dirname(__DIR__).'/fonts/*.ttf'));
     }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PapyrusPDF\FontsCjk\Tests;
+namespace Vicam\Pdf\FontsCjk\Tests;
 
-use PapyrusPDF\FontsCjk\NotoCjk;
-use PapyrusPDF\Forms\{FieldAssignment, FieldValue, FormFillRequest};
-use PapyrusPDF\PdfEngineFactory;
+use Vicam\Pdf\FontsCjk\NotoCjk;
+use Vicam\Pdf\Forms\{FieldAssignment, FieldValue, FormFillRequest};
+use Vicam\Pdf\PdfEngineFactory;
 use PHPUnit\Framework\TestCase;
 
 final class NotoCjkTest extends TestCase
@@ -22,14 +22,14 @@ final class NotoCjkTest extends TestCase
     public function testManifestResolvesEachLanguagePackWithoutOwningFonts(): void
     {
         $expected = [
-            'japaneseSans' => \PapyrusPDF\FontsJa\NotoJa::path(\PapyrusPDF\FontsJa\NotoJa::SANS),
-            'japaneseSerif' => \PapyrusPDF\FontsJa\NotoJa::path(\PapyrusPDF\FontsJa\NotoJa::SERIF),
-            'chineseSans' => \PapyrusPDF\FontsZhHans\NotoZhHans::path(\PapyrusPDF\FontsZhHans\NotoZhHans::SANS),
-            'chineseSerif' => \PapyrusPDF\FontsZhHans\NotoZhHans::path(\PapyrusPDF\FontsZhHans\NotoZhHans::SERIF),
-            'koreanSans' => \PapyrusPDF\FontsKo\NotoKo::path(\PapyrusPDF\FontsKo\NotoKo::SANS),
-            'koreanSerif' => \PapyrusPDF\FontsKo\NotoKo::path(\PapyrusPDF\FontsKo\NotoKo::SERIF),
-            'traditionalChineseSans' => \PapyrusPDF\FontsZhHant\NotoZhHant::path(\PapyrusPDF\FontsZhHant\NotoZhHant::SANS),
-            'traditionalChineseSerif' => \PapyrusPDF\FontsZhHant\NotoZhHant::path(\PapyrusPDF\FontsZhHant\NotoZhHant::SERIF),
+            'japaneseSans' => \Vicam\Pdf\FontsJa\NotoJa::path(\Vicam\Pdf\FontsJa\NotoJa::SANS),
+            'japaneseSerif' => \Vicam\Pdf\FontsJa\NotoJa::path(\Vicam\Pdf\FontsJa\NotoJa::SERIF),
+            'chineseSans' => \Vicam\Pdf\FontsZhHans\NotoZhHans::path(\Vicam\Pdf\FontsZhHans\NotoZhHans::SANS),
+            'chineseSerif' => \Vicam\Pdf\FontsZhHans\NotoZhHans::path(\Vicam\Pdf\FontsZhHans\NotoZhHans::SERIF),
+            'koreanSans' => \Vicam\Pdf\FontsKo\NotoKo::path(\Vicam\Pdf\FontsKo\NotoKo::SANS),
+            'koreanSerif' => \Vicam\Pdf\FontsKo\NotoKo::path(\Vicam\Pdf\FontsKo\NotoKo::SERIF),
+            'traditionalChineseSans' => \Vicam\Pdf\FontsZhHant\NotoZhHant::path(\Vicam\Pdf\FontsZhHant\NotoZhHant::SANS),
+            'traditionalChineseSerif' => \Vicam\Pdf\FontsZhHant\NotoZhHant::path(\Vicam\Pdf\FontsZhHant\NotoZhHant::SERIF),
         ];
         self::assertSame($expected, get_object_vars(NotoCjk::formFallbacks()));
         self::assertDirectoryDoesNotExist(dirname(__DIR__).'/fonts');
@@ -82,7 +82,7 @@ final class NotoCjkTest extends TestCase
             try {
                 $disabled->fillForm($path, $request)->artifact->close();
                 self::fail('Without discovery a Japanese program is unavailable.');
-            } catch (\PapyrusPDF\Core\PdfException $error) {
+            } catch (\Vicam\Pdf\Core\PdfException $error) {
                 // PapyrusPDF 0.3.6 reports the uncovered value; earlier releases report the unusable field font.
                 self::assertContains($error->diagnostic, ['form.glyph-unavailable', 'form.font-unsupported']);
             }

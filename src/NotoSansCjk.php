@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PapyrusPDF\FontsCjk;
+namespace Vicam\Pdf\FontsCjk;
 
-use PapyrusPDF\Papyrus\Overlay\OverlayFontFile;
+use Vicam\Pdf\Overlay\OverlayFontFile;
 
 /**
  * Static Noto Sans SC and Noto Sans KR Regular, for overlay text in Chinese, Japanese kana and Korean.
@@ -28,10 +28,10 @@ final class NotoSansCjk
     public static function path(string $file): string
     {
         return match ($file) {
-            self::SIMPLIFIED_CHINESE => \PapyrusPDF\FontsZhHans\NotoZhHans::path($file),
-            self::KOREAN => \PapyrusPDF\FontsKo\NotoKo::path($file),
-            self::JAPANESE => \PapyrusPDF\FontsJa\NotoJa::path($file),
-            self::TRADITIONAL_CHINESE => \PapyrusPDF\FontsZhHant\NotoZhHant::path($file),
+            self::SIMPLIFIED_CHINESE => \Vicam\Pdf\FontsZhHans\NotoZhHans::path($file),
+            self::KOREAN => \Vicam\Pdf\FontsKo\NotoKo::path($file),
+            self::JAPANESE => \Vicam\Pdf\FontsJa\NotoJa::path($file),
+            self::TRADITIONAL_CHINESE => \Vicam\Pdf\FontsZhHant\NotoZhHant::path($file),
             default => throw new \InvalidArgumentException('Unknown CJK font file.'),
         };
     }
