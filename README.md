@@ -1,47 +1,23 @@
-# PapyrusPDF CJK fonts
-
-Optional static Noto Sans and Noto Serif **JP, SC and KR Regular**, under SIL OFL
-1.1. Font files and provenance stay in this package, outside the core library.
+# PapyrusPDF CJK font umbrella
 
 ```sh
-composer require vicam/papyrus-pdf-fonts-cjk
+composer require vicam/papyrus-pdf-fonts-cjk:^0.4.0
 ```
 
-With PapyrusPDF 0.3.0+, `PdfEngineFactory` discovers `NotoCjk` automatically.
-`fillForm()` and stored-value refresh use these fonts only when the source font
-and explicit caller fonts cannot draw the displayed text. No caller font loading
-is needed. Mincho/Min/Ming/Song/Batang/Myeongjo/serif requests select Serif;
-Gothic/Go/Hei/Dotum/Gulim/sans select Sans. Kana and Hangul disambiguate text;
-otherwise the source CID collection/CMap and face select JP, SC or KR. Japanese
-never falls through to SC. CNS1 uses the SC face: Traditional Chinese regional
-shape parity is not claimed. Unknown shared-Han text needs a regional source
-hint or an explicit caller font.
+This compatibility umbrella requires four free language packs: `fonts-ja`,
+`fonts-zh-hans`, `fonts-zh-hant` and `fonts-ko` (all prefixed `vicam/papyrus-pdf-`).
+It contains no font binaries. PHP 8.3+ and PapyrusPDF ^0.3.4 are required.
+Install just the needed language pack to reduce download and deployment size.
 
-The report includes `form.font-substituted` and `fontSubstitutions` with the field,
-requested face and replacement face. Fonts are loaded lazily once per engine,
-and appearances subset-embed used glyphs. Stored-value editable refresh keeps
-the original editing DA; subsequent viewer editing may use viewer fonts.
+The `PapyrusPDF\FontsCjk\NotoCjk::formFallbacks()` API still provides JP, SC and KR
+Sans/Serif files, now in their packages, and additionally TC Sans/Serif. Automatic
+form discovery works without application changes. CNS1 and zh-Hant hints select
+TC regional shapes. Japanese never uses Chinese shapes.
 
-Disable discovery with `new PdfEngineFactory(discoverFormFonts: false)`, or inject
-`formFallbacks: NotoCjk::formFallbacks()` once at application setup. Explicit
-request fonts retain priority. Old package releases keep their overlay-only
-behaviour when used with new core releases.
-
-## Overlays
-
-The existing helper keeps its SC/KR order for compatibility:
-
-```php
-use PapyrusPDF\FontsCjk\NotoSansCjk;
-use PapyrusPDF\Papyrus\Overlay\OverlayFonts;
-
-$fonts = OverlayFonts::bundled(NotoSansCjk::fontFiles());
-```
-
-For Japanese overlays, put `new OverlayFontFile(NotoSansCjk::path(NotoSansCjk::JAPANESE))`
-first in your fallback list. Form region/style matching is independent of that
-legacy overlay helper. Regular weights only; no synthetic bold/italic.
-
-See [PROVENANCE.md](PROVENANCE.md), `fonts/OFL.txt` and `fonts/OFL-Serif.txt` for
-upstream URLs, versions, build method, checksums and licence grants. The PHP
-package retains its existing licence; the font licences permit redistribution.
+`PapyrusPDF\FontsCjk\NotoSansCjk` keeps its constants, `path()`, `paths()` and
+`fontFiles()`. The latter two still return **SC then KR only**, preserving overlay
+behaviour. `JAPANESE` still resolves JP; `TRADITIONAL_CHINESE` is a new opt-in path.
+For Japanese or Traditional Chinese overlays, put the corresponding
+`new OverlayFontFile(NotoSansCjk::path(...))` first in your fallback list.
+No synthetic bold or italic. Each language pack records its font provenance and
+ships unmodified SIL OFL licence texts. PHP package licence terms are unchanged.

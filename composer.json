@@ -1,11 +1,15 @@
 {
     "name": "vicam/papyrus-pdf-fonts-cjk",
-    "description": "Static Noto Sans and Serif JP, SC and KR fonts for PapyrusPDF form appearances and overlays.",
+    "description": "Compatibility umbrella for PapyrusPDF Japanese, Simplified/Traditional Chinese and Korean font packs.",
     "type": "library",
     "license": "proprietary",
     "require": {
         "php": "^8.3",
-        "vicam/papyrus-pdf": "^0.3.0"
+        "vicam/papyrus-pdf": "^0.3.4",
+        "vicam/papyrus-pdf-fonts-ja": "^0.1.0",
+        "vicam/papyrus-pdf-fonts-zh-hans": "^0.1.0",
+        "vicam/papyrus-pdf-fonts-zh-hant": "^0.1.0",
+        "vicam/papyrus-pdf-fonts-ko": "^0.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.5"

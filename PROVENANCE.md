@@ -1,5 +1,14 @@
 # Font provenance
 
+Version 0.4.0 contains no font binaries. All fonts are supplied by the four
+required language packs; their PROVENANCE.md files pin upstream sources, versions,
+static build method and SHA-256 values. JP/SC/KR binaries are byte-identical to
+this package's v0.3.0; TC is newly built from official Google Fonts.
+
+Historical provenance from v0.3.0 follows for traceability only.
+
+# Font provenance
+
 | File | Bytes | SHA-256 |
 | --- | --- | --- |
 | `fonts/NotoSansSC-Regular.ttf` | 10,595,876 | `9cdb15629d85f80bc058033b0b3b5444d63f69e976e54a9ae4c2d6f37f96c565` |

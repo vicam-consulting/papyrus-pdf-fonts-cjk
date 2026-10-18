@@ -24,7 +24,18 @@ final class NotoSansCjkTest extends TestCase
         foreach (self::SHA256 as $file => $sha256) {
             self::assertSame($sha256, hash_file('sha256', NotoSansCjk::path($file)), $file);
         }
-        self::assertFileExists(dirname(__DIR__).'/fonts/OFL.txt');
+        self::assertFileExists(dirname(__DIR__).'/notices/OFL.txt');
+    }
+
+    public function testLegacyConstantsAndNewTcPath(): void
+    {
+        self::assertSame('NotoSansSC-Regular.ttf', NotoSansCjk::SIMPLIFIED_CHINESE);
+        self::assertSame('NotoSansKR-Regular.ttf', NotoSansCjk::KOREAN);
+        self::assertSame('NotoSansJP-Regular.ttf', NotoSansCjk::JAPANESE);
+        self::assertSame(\PapyrusPDF\FontsJa\NotoJa::path(\PapyrusPDF\FontsJa\NotoJa::SANS), NotoSansCjk::path(NotoSansCjk::JAPANESE));
+        self::assertSame(\PapyrusPDF\FontsZhHant\NotoZhHant::path(\PapyrusPDF\FontsZhHant\NotoZhHant::SANS), NotoSansCjk::path(NotoSansCjk::TRADITIONAL_CHINESE));
+        self::assertSame(['NotoSansSC-Regular.ttf', 'NotoSansKR-Regular.ttf'], array_map(basename(...), NotoSansCjk::paths()));
+        self::assertSame([], glob(dirname(__DIR__).'/fonts/*.ttf'));
     }
 
     public function testFontFilesAreOverlayFallbacksInPathOrder(): void

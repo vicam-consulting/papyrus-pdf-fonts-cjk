@@ -19,10 +19,26 @@ final class NotoCjkTest extends TestCase
         'NotoSerifKR-Regular.ttf' => '21e2cd0ff88833ef416fd10943de9c7f06315ef6c0465555b48838b8a24470fb',
     ];
 
+    public function testManifestResolvesEachLanguagePackWithoutOwningFonts(): void
+    {
+        $expected = [
+            'japaneseSans' => \PapyrusPDF\FontsJa\NotoJa::path(\PapyrusPDF\FontsJa\NotoJa::SANS),
+            'japaneseSerif' => \PapyrusPDF\FontsJa\NotoJa::path(\PapyrusPDF\FontsJa\NotoJa::SERIF),
+            'chineseSans' => \PapyrusPDF\FontsZhHans\NotoZhHans::path(\PapyrusPDF\FontsZhHans\NotoZhHans::SANS),
+            'chineseSerif' => \PapyrusPDF\FontsZhHans\NotoZhHans::path(\PapyrusPDF\FontsZhHans\NotoZhHans::SERIF),
+            'koreanSans' => \PapyrusPDF\FontsKo\NotoKo::path(\PapyrusPDF\FontsKo\NotoKo::SANS),
+            'koreanSerif' => \PapyrusPDF\FontsKo\NotoKo::path(\PapyrusPDF\FontsKo\NotoKo::SERIF),
+            'traditionalChineseSans' => \PapyrusPDF\FontsZhHant\NotoZhHant::path(\PapyrusPDF\FontsZhHant\NotoZhHant::SANS),
+            'traditionalChineseSerif' => \PapyrusPDF\FontsZhHant\NotoZhHant::path(\PapyrusPDF\FontsZhHant\NotoZhHant::SERIF),
+        ];
+        self::assertSame($expected, get_object_vars(NotoCjk::formFallbacks()));
+        self::assertDirectoryDoesNotExist(dirname(__DIR__).'/fonts');
+    }
+
     public function testManifestAndStaticRegularFontsMatchProvenance(): void
     {
         $files = get_object_vars(NotoCjk::formFallbacks());
-        self::assertCount(6, $files);
+        self::assertCount(8, $files);
         $directory = sys_get_temp_dir().'/papyrus-cjk-'.bin2hex(random_bytes(6));
         self::assertTrue(mkdir($directory, 0700));
         try {
